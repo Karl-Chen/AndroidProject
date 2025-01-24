@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:id="@+id/example"
+        android:text="顯示文字練習"
+        android:gravity="center"
+        android:background="#84DC84"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Textview練習2"
+        android:textColor="#E61313"
+        android:textSize="26sp"/>
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="第三組文字練習"
+        android:textColor="#1063FA"
+        android:background="#45FB38"
+        android:textStyle="italic|bold"
+        android:textAlignment="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="第四組TextView練習"
+        android:background="#AA8812"
+        android:gravity="right|bottom"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="外部位置設定\n11111"
+        android:background="#AA00EE"
+        android:layout_gravity="right"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:text="一"
+            android:background="#FFDDAA"/>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:text="二"
+            android:background="#FF00AA"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

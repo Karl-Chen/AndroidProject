@@ -10,10 +10,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/hello"
+        android:text="Hello Android 應用程式!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="標準結束標籤語法!"
+        app:layout_constraintTop_toBottomOf="@id/hello"
+        app:layout_constraintStart_toStartOf="@id/hello">
+
+    </TextView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--xmlns:XML namespace的縮寫 xmlns:android="http://schemas.android.com/apk/res/android"
+android就是那個url的namespace，android app tool這三個都要在一開始就給，但這三個的namespace都不會變，直接copy就好
+所以android:layout_width就是在android的namespace裡面的layout_width屬性
+android的屬性編譯上會作用於顯示元件上
+app主要是訂義constrainLayout的佈局屬性，所以不使用constrainLayout的話可以不用寫xmlns:app=.....
+tools提供開發元件設計工具的顯示頁面(用UI去拉XML)，所以純手寫xml就可以不用加，tools在APP被打包後就不會有效
+-->

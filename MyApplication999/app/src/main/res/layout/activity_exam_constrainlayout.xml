@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_title"
+        android:text="高屏澎東分署登入畫面"
+        android:textSize="24dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="160dp"
+        android:id="@+id/image"
+        android:src="@drawable/strikefreedom"
+        android:scaleType="fitXY"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/text_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_acc"
+        android:text="帳號："
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_acc"
+        android:hint="請輸人帳號"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_acc"
+        app:layout_constraintLeft_toRightOf="@id/text_acc"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_pwd"
+        android:text="密碼："
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/edit_acc"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        />
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_pwd"
+        android:hint="請輸人密碼"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_pwd"
+        app:layout_constraintLeft_toRightOf="@id/text_pwd"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_pwd"
+        android:gravity="center">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="學生"
+            android:textSize="18sp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="教師"
+            android:textSize="18sp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="職工"
+            android:textSize="18sp"/>
+    </RadioGroup>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidline_v"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="65dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guidline_h"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="390dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_login"
+        android:text="登入"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/guidline_v"
+        app:layout_constraintTop_toBottomOf="@id/guidline_h"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_reg"
+        android:text="註冊"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/btn_login"
+        app:layout_constraintLeft_toRightOf="@id/btn_login"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

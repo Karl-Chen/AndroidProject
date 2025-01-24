@@ -13,7 +13,28 @@
         android:theme="@style/Theme.Application1"
         tools:targetApi="31">
         <activity
+            android:name=".Activity_Checkbox_Java"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_Editview_Java"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_OnTouch_Java"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_Imageview_java"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_TextView_Java"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_Button_Java"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_RadioButton_java"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

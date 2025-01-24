@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="轉換後的華氏溫度："
+        android:id="@+id/text_result"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_close"
+        android:text="關閉"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/text_result"
+        app:layout_constraintLeft_toLeftOf="@id/text_result"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
