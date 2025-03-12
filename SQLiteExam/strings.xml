@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Application2</string>
+    <string name="sql_command">INSERT INTO students (student_id, student_name, student_grade) VALUES (9, \"測試SQL命令\", 50)</string>
+</resources>

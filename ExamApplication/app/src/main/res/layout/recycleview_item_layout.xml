@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_num"
+        android:text="車站編號："
+        android:textSize="18sp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_station"
+        android:text="車站站名："
+        android:layout_marginLeft="10dp"
+        android:textSize="18sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_lat_lng"
+        android:text="車站位置："
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="2dp"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+</LinearLayout>
