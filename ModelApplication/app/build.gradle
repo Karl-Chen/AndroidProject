@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.modelapplication'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.modelapplication"
@@ -40,6 +40,10 @@ dependencies {
     implementation libs.lifecycle.viewmodel.ktx
     implementation libs.navigation.fragment
     implementation libs.navigation.ui
+    implementation libs.activity
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
