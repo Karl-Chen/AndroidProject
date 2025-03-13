@@ -81,10 +81,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        if (response.isSuccessful()) {
-                            System.out.println("Update successful: " + response.body().string());
+                        if (response.isSuccessful() && response.body() != null) {
+                            String responseData = response.body().string();
+                            System.out.println("Update successful: " + responseData);
                             try {
-                                JSONObject obj = new JSONObject(response.body().toString());
+                                JSONObject obj = new JSONObject(responseData);
                                 MemberConfig.mMmeber.SetMemberID(obj.getString("memberID"));
                                 MemberConfig.mMmeber.SetName(obj.getString("name"));
                                 MemberConfig.mMmeber.SetAddress(obj.getString("address"));

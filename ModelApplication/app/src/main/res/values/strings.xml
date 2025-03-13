@@ -19,11 +19,14 @@
     <string name="edit_hint_mima2">請再次輸入密碼</string>
     <string name="text_name">姓名</string>
     <string name="edit_hint_name">請輸入姓名</string>
+    <string name="text_email">信箱</string>
+    <string name="edit_hint_email">請輸入信箱</string>
     <string name="text_addr">地址</string>
     <string name="edit_hint_addr">請輸入地址</string>
     <string name="text_phone">電話</string>
     <string name="edit_hint_phone">請輸入電話</string>
     <string name="btn_login">登入</string>
     <string name="btn_createAcc">建立帳號</string>
+    <string name="btn_createAccBack">返回登入</string>
 
 </resources>
