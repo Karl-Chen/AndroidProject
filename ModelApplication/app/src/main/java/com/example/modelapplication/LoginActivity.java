@@ -1,4 +1,4 @@
-package com.example.modelapplication.ui;
+package com.example.modelapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,18 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.modelapplication.CreateAccountActivity;
-import com.example.modelapplication.MainActivity;
-import com.example.modelapplication.Member;
-import com.example.modelapplication.MemberConfig;
-import com.example.modelapplication.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String strAcc = editTextAcc.getText().toString();
                 String strMima = editTextMima.getText().toString();
-                String url = MemberConfig.Url + MemberConfig.Login;
+                String url = UrlConfig.Url + UrlConfig.Login;
                 OkHttpClient client = new OkHttpClient();
                 JSONObject jsonObject = new JSONObject();
                 try {
