@@ -2,6 +2,8 @@ package com.example.modelapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -121,8 +123,16 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 MemberConfig.mMmeber.SetAccount(obj2.getString("account"));
 //                                Intent i = new Intent(CreateAccountActivity.this, LoginActivity.class);
 //                                startActivity(i);
-                                Toast.makeText(CreateAccountActivity.this, "帳號建立完成，請重新登入!", Toast.LENGTH_LONG);
-                                finish();
+                                Handler handler = new Handler(Looper.getMainLooper());
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(CreateAccountActivity.this, "帳號建立完成，請重新登入!", Toast.LENGTH_LONG).show();
+
+                                        finish();
+                                    }
+                                }, 100);
+                                //Toast.makeText(CreateAccountActivity.this, "帳號建立完成，請重新登入!", Toast.LENGTH_LONG);
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
