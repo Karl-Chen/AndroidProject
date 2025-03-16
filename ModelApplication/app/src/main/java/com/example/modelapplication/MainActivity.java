@@ -3,6 +3,7 @@ package com.example.modelapplication;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
-    private ArrayList<Integer> productTypeIDLit;
+    private ArrayList<Integer> productTypeIDList;
+    private ArrayList<Integer> productIDList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        productTypeIDLit = new ArrayList<>();
+        productTypeIDList = new ArrayList<>();
+        productIDList = new ArrayList<>();
         GetProductType();
     }
 
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         int id = item.getItemId();
         if (id == R.id.action_products) {
+//            replaceFragment(fragment, R.id.nav_host_fragment_content_main);
 
         } else if (id == R.id.action_order_car) {
 
@@ -130,15 +134,18 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Update successful: " + responseData);
                     try {
                         JSONArray arr = new JSONArray(responseData);
-                        ProductConfig.productTypes.clear();
-                        productTypeIDLit.clear();
+                        ProductConfig.productList.clear();
+                        productTypeIDList.clear();
                         ProductType alloPt = new ProductType();
                         alloPt.ProductTypeName = "全部商品";
+                        alloPt.ProductTypeID = "";
                         ProductConfig.productTypes.add(alloPt);
                         for (int i = 0; i < arr.length(); i++)
                         {
                             ProductType pt = new ProductType();
                             JSONObject obj1 = new JSONObject(arr.get(i).toString());
+//                            pt.ProductTypeID = obj1.getString("specificationID");
+//                            pt.ProductTypeName = obj1.getString("specificationName");
                             pt.ProductTypeID = obj1.getString("specificationID");
                             pt.ProductTypeName = obj1.getString("specificationName");
                             ProductConfig.productTypes.add(pt);
@@ -158,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Update failed: " + response.message());
                 }
             }
+
         });
     }
 
@@ -192,24 +200,35 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Update successful: " + responseData);
                     try {
                         JSONArray arr = new JSONArray(responseData);
-                        ProductConfig.productTypes.clear();
-                        productTypeIDLit.clear();
-                        ProductType alloPt = new ProductType();
-                        alloPt.ProductTypeName = "全部商品";
-                        ProductConfig.productTypes.add(alloPt);
+                        ProductConfig.productList.clear();
+
                         for (int i = 0; i < arr.length(); i++)
                         {
-                            ProductType pt = new ProductType();
+                            Product p = new Product();
                             JSONObject obj1 = new JSONObject(arr.get(i).toString());
-                            pt.ProductTypeID = obj1.getString("specificationID");
-                            pt.ProductTypeName = obj1.getString("specificationName");
-                            ProductConfig.productTypes.add(pt);
+                            p.ProductID = obj1.getString("productID");
+                            p.ProductName = obj1.getString("productName");
+                            p.Description = obj1.getString("description");
+                            p.Photo = obj1.getString("photo");
+                            p.CostJP = obj1.getInt("costJP");
+                            p.CostExchangeRate = obj1.getDouble("costExchangeRate");
+                            p.PriceExchangeRage = obj1.getDouble("priceExchangeRage");
+                            p.Inventory = obj1.getInt("inventory");
+                            p.OrderedQuantity = obj1.getInt("orderedQuantity");
+                            p.ProductTypeID = obj1.getString("productTypeID");
+                            p.ProductSpecificationID = obj1.getString("productSpecificationID");
+                            p.BrandID = obj1.getString("brandID");
+                            p.SupplierID = obj1.getString("supplierID");
+                            ProductConfig.productList.add(p);
                         }
                         Handler handler = new Handler(Looper.getMainLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                SetNavigationItem();
+                                UpdateProductListItem();
+//                                SetNavigationItem();
+//                                GetProductList("");
+
                             }
                         }, 100);
                     } catch (JSONException e) {
@@ -229,12 +248,13 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < ProductConfig.productTypes.size(); i++)
         {
             ProductConfig.productTypes.get(i).id = View.generateViewId();
-            productTypeIDLit.add(ProductConfig.productTypes.get(i).id);
+            productTypeIDList.add(ProductConfig.productTypes.get(i).id);
             MenuItem item = menu.add(Menu.NONE, ProductConfig.productTypes.get(i).id, Menu.NONE, ProductConfig.productTypes.get(i).ProductTypeName);
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
-                    int index = productTypeIDLit.indexOf(menuItem.getItemId());
+                    int index = productTypeIDList.indexOf(menuItem.getItemId());
+                    GetProductList(ProductConfig.productTypes.get(index).ProductTypeID);
                     // 使用 NavController 來切換 Fragment，這裡可以用動態方式對應 Fragment
 //                    navController.navigate(R.id.dynamicFragment);
 //                    drawerLayout.closeDrawer(GravityCompat.START);
@@ -242,5 +262,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void UpdateProductListItem() {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("update", true);
+        getSupportFragmentManager().setFragmentResult("UpDateProduct", bundle);
+        Log.d("FragmentManager Check", "Activity's FragmentManager: " + getSupportFragmentManager().toString());
+
+    }
+
+    private void replaceFragment(Fragment fragment, int id) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(id, fragment)  // R.id.fragment_container 是 `app_bar_main.xml` 內的容器 ID
+                .commit();
     }
 }

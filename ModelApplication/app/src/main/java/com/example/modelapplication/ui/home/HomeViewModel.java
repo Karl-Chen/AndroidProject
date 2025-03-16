@@ -4,16 +4,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.modelapplication.Product;
+import com.example.modelapplication.ProductConfig;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private ArrayList<Product> productList = new ArrayList<>();
 
-    public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+    public ArrayList<Product> getProductList() {
+        return productList;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    // 更新資料
+    public void setProductList(List<Product> newProductList) {
+        productList = ProductConfig.productList;
     }
 }
