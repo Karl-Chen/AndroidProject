@@ -6,4 +6,5 @@ public class UrlConfig {
     public static String CreateMember = "/apiVMApiMembers/PostMember";
     public static String GetProductSpecification = "/apiApiProduct/GetProductSpecification";
     public static String GetProductList = "/apiApiProduct/GetProductList";
+    public static String PutProductItemOrderCart = "/apiApiOrderCarItem";
 }

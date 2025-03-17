@@ -1,6 +1,9 @@
 package com.example.modelapplication.ui.home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,12 +11,30 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.modelapplication.CreateAccountActivity;
+import com.example.modelapplication.MemberConfig;
 import com.example.modelapplication.ProductConfig;
 import com.example.modelapplication.R;
+import com.example.modelapplication.UrlConfig;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
@@ -45,7 +66,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 String strid = ((TextView)view.findViewById(R.id.text_productid)).getText().toString();
+                String strName = ((TextView)view.findViewById(R.id.text_name)).getText().toString();
                 Log.d("resID", "strProductID: " + strid);
+                PutOrderCartToServer(strid, strName);
             }
         });
         return new ViewHolder(view);
@@ -69,6 +92,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void updateData() {
         notifyDataSetChanged();
     }
@@ -81,5 +105,49 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public int getItemCount() {
         return ProductConfig.productList.size();
+    }
+
+    private void PutOrderCartToServer(String productID, String Name) {
+        final String strName = Name.substring(3, Name.length() - 3);
+        String url = UrlConfig.Url + UrlConfig.PutProductItemOrderCart + "/" + MemberConfig.mMmeber.GetAccount();
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("productid", productID);
+            jsonObject.put("count", 1);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        RequestBody requestBody = RequestBody.create(
+                jsonObject.toString(), MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(url) // `PUT /api/products/{id}`
+                .put(requestBody)
+                .addHeader("Content-Type", "application/json")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseData = response.body().string();
+                    System.out.println("Update successful: " + responseData);
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(_context, strName + responseData, Toast.LENGTH_LONG).show();
+                        }
+                    }, 100);
+                } else {
+                    System.out.println("Update failed: " + response.message());
+                }
+            }
+        });
     }
 }

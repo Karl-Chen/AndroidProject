@@ -48,6 +48,15 @@
             android:layout_below="@id/text_desc"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"/>
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="26dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_cart"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"/>
 
         <TextView
             android:id="@+id/text_productid"

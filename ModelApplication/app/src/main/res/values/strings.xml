@@ -32,5 +32,6 @@
     <string name="btn_login">登入</string>
     <string name="btn_createAcc">建立帳號</string>
     <string name="btn_createAccBack">返回登入</string>
+    <string name="title_activity_order_cart_list">OrderCartListActivity</string>
 
 </resources>
