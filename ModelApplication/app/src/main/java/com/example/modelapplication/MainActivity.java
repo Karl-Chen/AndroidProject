@@ -1,5 +1,6 @@
 package com.example.modelapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     private ArrayList<Integer> productTypeIDList;
-    private ArrayList<Integer> productIDList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +56,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        setSupportActionBar(binding.appBarMain.toolbar);
-//        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null)
-//                        .setAnchorView(R.id.fab).show();
-//            }
-//        });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -78,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         productTypeIDList = new ArrayList<>();
-        productIDList = new ArrayList<>();
         GetProductType();
     }
 
@@ -97,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
 //            replaceFragment(fragment, R.id.nav_host_fragment_content_main);
 
         } else if (id == R.id.action_order_car) {
+            finish();
+            Intent i = new Intent(MainActivity.this, OrderCartItemActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.action_member) {
 
@@ -226,9 +219,6 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 UpdateProductListItem();
-//                                SetNavigationItem();
-//                                GetProductList("");
-
                             }
                         }, 100);
                     } catch (JSONException e) {
@@ -255,9 +245,6 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
                     int index = productTypeIDList.indexOf(menuItem.getItemId());
                     GetProductList(ProductConfig.productTypes.get(index).ProductTypeID);
-                    // 使用 NavController 來切換 Fragment，這裡可以用動態方式對應 Fragment
-//                    navController.navigate(R.id.dynamicFragment);
-//                    drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
                 }
             });
@@ -272,10 +259,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment, int id) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(id, fragment)  // R.id.fragment_container 是 `app_bar_main.xml` 內的容器 ID
-                .commit();
-    }
 }
