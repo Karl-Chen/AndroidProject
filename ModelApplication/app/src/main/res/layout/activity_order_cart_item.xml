@@ -119,14 +119,23 @@
         app:layout_constraintLeft_toRightOf="@id/text_get_phone"
         app:layout_constraintTop_toBottomOf="@id/edit_get_name"/>
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_totalprice"
         android:text="商品總價："
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/btn_order"
-        android:layout_margin="10dp"
-        android:gravity="right"/>
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_send_price"
+        android:text="運費："
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_order"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,11 +46,13 @@ import okhttp3.Response;
 public class OrderCartItemActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     OrderCardAdapter orderCardAdapter;
-    TextView textTotalPrice;
+    TextView textTotalPrice, textSendPrice;
 
     Spinner spSendWay;
     EditText editSendAddr, editGetName, editGetPhone;
     CheckBox checkFix;
+
+    int index = 0, sendPrice = 0, fixPrice = 0;
 
     String[] items = {"自取", "711 取貨", "全家取貨", "萊爾富取貨", "OK 取貨"};
     @Override
@@ -72,18 +75,34 @@ public class OrderCartItemActivity extends AppCompatActivity {
         editSendAddr = findViewById(R.id.edit_send_addr);
         editGetName = findViewById(R.id.edit_get_name);
         editGetPhone = findViewById(R.id.edit_get_phone);
+        textSendPrice = findViewById(R.id.text_send_price);
+        checkFix = findViewById(R.id.checkBox);
+        checkFix.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b)
+                    fixPrice = 60;
+                else
+                    fixPrice = 0;
+                textSendPrice.setText("運費：" + String.valueOf(sendPrice + fixPrice) + "元");
+            }
+        });
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         spSendWay.setAdapter(adapter);
         spSendWay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedItem = items[i];
+                index = i;
+                String selectedItem = items[index];
                 Toast.makeText(OrderCartItemActivity.this, "選擇: " + selectedItem, Toast.LENGTH_SHORT).show();
                 if (i == 0) {
                     editSendAddr.setEnabled(false);
+                    sendPrice = 0;
                 } else {
                     editSendAddr.setEnabled(true);
+                    sendPrice = 60;
                 }
+                textSendPrice.setText("運費：" + String.valueOf(sendPrice + fixPrice) + "元");
             }
 
             @Override
@@ -126,10 +145,6 @@ public class OrderCartItemActivity extends AppCompatActivity {
     public void GetOrderCartList() {
         String url = UrlConfig.Url + UrlConfig.GetOrderCartItem + "/" + MemberConfig.mMmeber.GetAccount();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-//        HttpUrl url = HttpUrl.parse(strUrl)
-//                .newBuilder()
-//                .addQueryParameter("acc", MemberConfig.mMmeber.GetAccount())
-//                .build();
 
 
         Request request = new Request.Builder()
@@ -179,7 +194,7 @@ public class OrderCartItemActivity extends AppCompatActivity {
                                         OrderCartConfig.orderCartItemArrayList) {
                                     totalPrice += item.price * item.count;
                                 }
-                                textTotalPrice.setText("商品總額：" + String.valueOf(totalPrice));
+                                textTotalPrice.setText("商品總額：" + String.valueOf(totalPrice) + "元");
                                 orderCardAdapter.SetListData();
                                 orderCardAdapter.notifyDataSetChanged();
                             }
@@ -236,6 +251,94 @@ public class OrderCartItemActivity extends AppCompatActivity {
                             Toast.makeText(OrderCartItemActivity.this, responseData, Toast.LENGTH_LONG).show();
                         }
                     }, 100);
+                } else {
+                    System.out.println("Update failed: " + response.message());
+                }
+            }
+        });
+    }
+
+    private void PostOrderData() {
+        OrderCartConfig.isFix = String.valueOf(checkFix.isChecked() ? "1" : "0");
+        OrderCartConfig.sendWay = String.valueOf(index + 1);
+        String strAcc = MemberConfig.mMmeber.GetAccount();
+        String url = UrlConfig.Url + UrlConfig.PostOrderData + "/" + strAcc + "/" + editGetName.getText().toString() + "/" + editGetPhone.getText().toString();
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("isFix", OrderCartConfig.isFix);
+            jsonObject.put("sendWay", OrderCartConfig.sendWay);
+            JSONArray array = new JSONArray();
+            for (var item:
+                 OrderCartConfig.orderCartItemArrayList) {
+                JSONObject obj = new JSONObject();
+                obj.put("product", item.product);
+                obj.put("img", item.img);
+                obj.put("name", item.name);
+                obj.put("price", item.price);
+                obj.put("count", item.count);
+                obj.put("offset", item.offset);
+                obj.put("MaxCount", item.MaxCount);
+                array.put(obj);
+            }
+            jsonObject.put("item", array);
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        RequestBody requestBody = RequestBody.create(
+                jsonObject.toString(), MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(url) // `PUT /api/products/{id}`
+                .post(requestBody)
+                .addHeader("Content-Type", "application/json")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseData = response.body().string();
+                    System.out.println("Update successful: " + responseData);
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(OrderCartItemActivity.this, responseData, Toast.LENGTH_LONG).show();
+                        }
+                    }, 100);
+//                    try {
+//                        JSONObject obj = new JSONObject(responseData);
+//                        MemberConfig.mMmeber.SetMemberID(obj.getString("memberID"));
+//                        MemberConfig.mMmeber.SetName(obj.getString("name"));
+//                        MemberConfig.mMmeber.SetAddress(obj.getString("address"));
+//                        MemberConfig.mMmeber.SetEmail(obj.getString("email"));
+//                        MemberConfig.mMmeber.SetPoint(obj.getInt("point"));
+//                        JSONArray arrTel = obj.getJSONArray("memberTel");
+//                        JSONObject obj1 = new JSONObject(arrTel.get(0).toString());
+//                        MemberConfig.mMmeber.SetTel(obj1.getString("telNumber"));
+//                        JSONObject obj2 = new JSONObject(obj.getJSONObject("memberAcc").toString());
+//                        MemberConfig.mMmeber.SetAccount(obj2.getString("account"));
+////                                Intent i = new Intent(CreateAccountActivity.this, LoginActivity.class);
+////                                startActivity(i);
+//                        Handler handler = new Handler(Looper.getMainLooper());
+//                        handler.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(CreateAccountActivity.this, "帳號建立完成，請重新登入!", Toast.LENGTH_LONG).show();
+//
+//                                finish();
+//                            }
+//                        }, 100);
+//                        //Toast.makeText(CreateAccountActivity.this, "帳號建立完成，請重新登入!", Toast.LENGTH_LONG);
+//                    } catch (JSONException e) {
+//                        throw new RuntimeException(e);
+//                    }
                 } else {
                     System.out.println("Update failed: " + response.message());
                 }

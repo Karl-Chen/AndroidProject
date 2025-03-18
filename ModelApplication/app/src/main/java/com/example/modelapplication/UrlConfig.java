@@ -9,4 +9,5 @@ public class UrlConfig {
     public static String PutProductItemOrderCart = "/apiApiOrderCarItem";
     public static String GetOrderCartItem = "/apiApiOrderCarItem/GetOrderCarData";
     public static String PutOrderCarData = "/apiApiOrderCarItem/PutOrderCarData";
+    public static String PostOrderData = "/apiApiOrderCarItem/PostOrder";
 }
