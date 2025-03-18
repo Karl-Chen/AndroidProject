@@ -9,8 +9,133 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_ordercart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:padding="8dp"
         android:clipToPadding="false"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_send_way"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_send_way"
+        android:text="取貨方式"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/text_send_addr"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"/>
+    <Spinner
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:id="@+id/spinner_send_way"
+        app:layout_constraintBottom_toTopOf="@id/text_send_addr"
+        app:layout_constraintLeft_toRightOf="@id/text_send_way"
+        android:layout_margin="10dp"
+        />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_send_addr"
+        android:text="取貨門市"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/text_fix"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/edit_send_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/edit_text"
+        android:ems="8"
+        android:enabled="false"
+        android:textColor="#032327"
+        android:layout_margin="10dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_send_addr"
+        app:layout_constraintLeft_toRightOf="@id/text_send_addr"
+        app:layout_constraintTop_toBottomOf="@id/text_send_way" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_fix"
+        android:text="加固包裝"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/text_get_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"/>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="八角加固"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/text_fix"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_fix"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_get_name"
+        android:text="取貨人"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/text_get_phone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/edit_get_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        android:textColor="#032327"
+        android:layout_margin="10dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_get_name"
+        app:layout_constraintLeft_toRightOf="@id/text_send_addr"
+        app:layout_constraintTop_toBottomOf="@id/checkBox" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_get_phone"
+        android:text="取貨人電話"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/text_totalprice"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/edit_get_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        android:textColor="#032327"
+        android:layout_margin="10dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_get_phone"
+        app:layout_constraintLeft_toRightOf="@id/text_get_phone"
+        app:layout_constraintTop_toBottomOf="@id/edit_get_name"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_totalprice"
+        android:text="商品總價："
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_order"
+        android:layout_margin="10dp"
+        android:gravity="right"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_order"
+        android:text="結帳"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_weight="1"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

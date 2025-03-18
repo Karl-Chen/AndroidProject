@@ -7,4 +7,6 @@ public class UrlConfig {
     public static String GetProductSpecification = "/apiApiProduct/GetProductSpecification";
     public static String GetProductList = "/apiApiProduct/GetProductList";
     public static String PutProductItemOrderCart = "/apiApiOrderCarItem";
+    public static String GetOrderCartItem = "/apiApiOrderCarItem/GetOrderCarData";
+    public static String PutOrderCarData = "/apiApiOrderCarItem/PutOrderCarData";
 }

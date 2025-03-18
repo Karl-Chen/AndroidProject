@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/img_item"
@@ -30,6 +30,15 @@
         android:visibility="gone"
         app:layout_constraintLeft_toRightOf="@id/img_item"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text_maxvol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toRightOf="@id/img_item"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_product_price"
@@ -43,10 +52,12 @@
 
     <Button
         android:id="@+id/btn_up"
-        android:layout_width="28dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="+"
-        app:layout_constraintLeft_toRightOf="@id/text_productname"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/text_product_price"
         app:layout_constraintTop_toTopOf="@id/edit_vol"
         app:layout_constraintBottom_toBottomOf="@id/edit_vol"/>
     <EditText
@@ -56,15 +67,17 @@
         android:background="@android:drawable/edit_text"
         android:ems="4"
         android:enabled="false"
+        android:textColor="#032327"
         app:layout_constraintBaseline_toBaselineOf="@id/text_product_price"
         app:layout_constraintLeft_toRightOf="@id/btn_up"
         app:layout_constraintTop_toBottomOf="@id/text_productname" />
 
     <Button
         android:id="@+id/btn_dn"
-        android:layout_width="28dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="-"
+        android:textColor="#FFFFFF"
         app:layout_constraintLeft_toRightOf="@id/edit_vol"
         app:layout_constraintTop_toTopOf="@id/edit_vol"
         app:layout_constraintBottom_toBottomOf="@id/edit_vol" />
@@ -73,7 +86,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/text_total_price"
         android:text="總價"
+        android:textSize="16sp"
+        android:textColor="#0F00FF"
         app:layout_constraintTop_toBottomOf="@id/btn_dn"
         app:layout_constraintLeft_toRightOf="@id/img_item"/>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#000000"
+        app:layout_constraintTop_toBottomOf="@id/text_total_price"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
