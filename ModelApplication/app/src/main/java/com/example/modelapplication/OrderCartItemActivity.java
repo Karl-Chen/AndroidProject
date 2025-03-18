@@ -80,9 +80,9 @@ public class OrderCartItemActivity extends AppCompatActivity {
                 String selectedItem = items[i];
                 Toast.makeText(OrderCartItemActivity.this, "選擇: " + selectedItem, Toast.LENGTH_SHORT).show();
                 if (i == 0) {
-                    editSendAddr.setEnabled(true);
-                } else {
                     editSendAddr.setEnabled(false);
+                } else {
+                    editSendAddr.setEnabled(true);
                 }
             }
 
