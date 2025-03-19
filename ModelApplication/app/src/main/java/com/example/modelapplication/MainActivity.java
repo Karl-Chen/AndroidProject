@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
 
         } else if (id == R.id.action_member) {
-
+            finish();
+            Intent i = new Intent(MainActivity.this, OrderListActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

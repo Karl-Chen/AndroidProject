@@ -137,7 +137,9 @@ public class OrderCartItemActivity extends AppCompatActivity {
         } else if (id == R.id.action_order_car) {
 
         } else if (id == R.id.action_member) {
-
+            finish();
+            Intent i = new Intent(OrderCartItemActivity.this, OrderListActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

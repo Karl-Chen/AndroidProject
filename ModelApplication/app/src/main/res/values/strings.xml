@@ -9,7 +9,7 @@
 
     <string name="menu_products">商品列表</string>
     <string name="menu_orderCars">購物車</string>
-    <string name="menu_member">會員專區</string>
+    <string name="menu_member">訂單專區</string>
 
     <string name="menu_home">商品列表</string>
     <string name="menu_gallery">購物車</string>
@@ -33,5 +33,7 @@
     <string name="btn_createAcc">建立帳號</string>
     <string name="btn_createAccBack">返回登入</string>
     <string name="title_activity_order_cart_list">OrderCartListActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
