@@ -26,9 +26,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_margin="10dp"/>
     <Spinner
-        android:layout_width="120dp"
+        android:layout_width="220dp"
         android:layout_height="40dp"
         android:id="@+id/spinner_send_way"
+        android:background="@drawable/spinner_background"
+        android:popupBackground="#E1E1E1"
         app:layout_constraintBottom_toTopOf="@id/text_send_addr"
         app:layout_constraintLeft_toRightOf="@id/text_send_way"
         android:layout_margin="10dp"

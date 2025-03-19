@@ -133,8 +133,12 @@ public class OrderCardAdapter extends RecyclerView.Adapter<OrderCardAdapter.View
                 String strid = ((TextView)view.findViewById(R.id.text_productid)).getText().toString();
                 String strName = ((TextView)view.findViewById(R.id.text_productname)).getText().toString();
                 Log.d("resID", "strProductID: " + strid);
-
+                String index = strid.split(";")[1];
+                int i = Integer.parseInt(index);
+                OrderCartConfig.orderCartItemArrayList.remove(i);
+                ((OrderCartItemActivity)_context).PutOrderCartToServer();
                 Toast.makeText(_context, "您將在購物車內移除商品：" + strName, Toast.LENGTH_LONG).show();
+                notifyDataSetChanged();
                 return false;
             }
         });
