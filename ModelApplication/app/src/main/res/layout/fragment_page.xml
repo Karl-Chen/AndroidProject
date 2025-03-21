@@ -7,11 +7,18 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_ordercart"
+        android:id="@+id/recyclerView_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
         android:clipToPadding="false"
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/text_err"
+        android:textSize="28sp"
+        android:visibility="gone"
+        android:gravity="center"/>
 </LinearLayout>

@@ -54,7 +54,7 @@ public class OrderCartItemActivity extends AppCompatActivity {
 
     int index = 0, sendPrice = 0, fixPrice = 0;
 
-    String[] items = {"自取", "711 取貨", "全家取貨", "萊爾富取貨", "OK 取貨"};
+    String[] items = {"自取", "7-11 取貨", "全家取貨", "萊爾富取貨", "OK 取貨"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,13 +131,11 @@ public class OrderCartItemActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_products) {
 //            replaceFragment(fragment, R.id.nav_host_fragment_content_main);
-            finish();
             Intent i = new Intent(OrderCartItemActivity.this, MainActivity.class);
             startActivity(i);
         } else if (id == R.id.action_order_car) {
 
         } else if (id == R.id.action_member) {
-            finish();
             Intent i = new Intent(OrderCartItemActivity.this, OrderListActivity.class);
             startActivity(i);
         }
@@ -260,9 +258,26 @@ public class OrderCartItemActivity extends AppCompatActivity {
         });
     }
 
+    private String HandleSendWay() {
+        String str = "";
+        if (index == 0) {
+            return "自取";
+        } else if (index == 1) {
+            str += "7-11 ";
+        } else if (index == 2) {
+            str += "全家 ";
+        } else if (index == 3) {
+            str += "萊爾富 ";
+        }else if (index == 4) {
+            str += "OK ";
+        }
+        str += editSendAddr.getText().toString();
+        return str;
+    }
+
     private void PostOrderData() {
         OrderCartConfig.isFix = String.valueOf(checkFix.isChecked() ? "1" : "0");
-        OrderCartConfig.sendWay = String.valueOf(index + 1);
+        OrderCartConfig.sendWay = HandleSendWay();
         String strAcc = MemberConfig.mMmeber.GetAccount();
         String url = UrlConfig.Url + UrlConfig.PostOrderData + "/" + strAcc + "/" + editGetName.getText().toString() + "/" + editGetPhone.getText().toString();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -312,6 +327,9 @@ public class OrderCartItemActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(OrderCartItemActivity.this, responseData, Toast.LENGTH_LONG).show();
+                            finish();
+                            Intent i = new Intent(OrderCartItemActivity.this, MainActivity.class);
+                            startActivity(i);
                         }
                     }, 100);
 //                    try {

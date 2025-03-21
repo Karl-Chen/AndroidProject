@@ -10,6 +10,7 @@ public class OrderItem {
     public String OrderPhone;
     public String PayWayID;
     public String OrdertatusID;
+    public String OrdertatusName;
     public String MemberID;
     public String ShippingWayID;
 }

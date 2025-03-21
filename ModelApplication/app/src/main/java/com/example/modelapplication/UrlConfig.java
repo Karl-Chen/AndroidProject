@@ -11,4 +11,6 @@ public class UrlConfig {
     public static String PutOrderCarData = "/apiApiOrderCarItem/PutOrderCarData";
     public static String PostOrderData = "/apiApiOrderCarItem/PostOrder";
     public static String GetOrderList = "/apiApiOrderCarItem/GetOrderList";
+    public static String CancelOrder = "/apiApiOrderCarItem/CancelOrder";
+    public static String GetOrderDetailList = "/apiApiOrderCarItem/GetOrderDetailList";
 }

@@ -87,12 +87,10 @@ public class MainActivity extends AppCompatActivity {
 //            replaceFragment(fragment, R.id.nav_host_fragment_content_main);
 
         } else if (id == R.id.action_order_car) {
-            finish();
             Intent i = new Intent(MainActivity.this, OrderCartItemActivity.class);
             startActivity(i);
 
         } else if (id == R.id.action_member) {
-            finish();
             Intent i = new Intent(MainActivity.this, OrderListActivity.class);
             startActivity(i);
         }

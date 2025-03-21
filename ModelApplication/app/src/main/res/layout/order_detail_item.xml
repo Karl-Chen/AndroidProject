@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_detail_item"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_margin="5dp"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_detail_productname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="商品"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@id/img_detail_item"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text_detail_productid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="id"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toRightOf="@id/img_detail_item"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text_detail_maxvol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toRightOf="@id/img_detail_item"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_detail_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="單價"
+        android:textSize="14sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/img_detail_item"
+        app:layout_constraintTop_toBottomOf="@id/text_detail_productname" />
+
+    <EditText
+        android:id="@+id/edit_detail_vol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/edit_text"
+        android:ems="4"
+        android:enabled="false"
+        android:textColor="#032327"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_detail_product_price"
+        app:layout_constraintLeft_toRightOf="@id/text_detail_product_price"
+        app:layout_constraintTop_toBottomOf="@id/text_detail_productname" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_detail_total_price"
+        android:text="總價"
+        android:textSize="16sp"
+        android:textColor="#0F00FF"
+        app:layout_constraintTop_toBottomOf="@id/edit_detail_vol"
+        app:layout_constraintLeft_toRightOf="@id/img_detail_item"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#000000"
+        app:layout_constraintTop_toBottomOf="@id/text_detail_total_price"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

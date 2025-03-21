@@ -19,13 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class OrderCardAdapter extends RecyclerView.Adapter<OrderCardAdapter.ViewHolder> {
+public class OrderCardAdapter extends RecyclerView.Adapter<OrderCardAdapter.ViewHolder> implements DialogCallback{
 
     Context _context;
     TextView textItemsTotalPrice;
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textProductName, textProductID, textProductPrice, textTotalPrice, textMaxVol, outSideTextPrice;
         EditText editVol;
         Button btnDN, btnUP;
@@ -109,6 +109,15 @@ public class OrderCardAdapter extends RecyclerView.Adapter<OrderCardAdapter.View
         textItemsTotalPrice = tv;
     }
 
+    @Override
+    public void DeletItem(int i) {
+        String strName = OrderCartConfig.orderCartItemArrayList.get(i).name;
+        OrderCartConfig.orderCartItemArrayList.remove(i);
+        ((OrderCartItemActivity)_context).PutOrderCartToServer();
+        Toast.makeText(_context, "您將在購物車內移除商品：" + strName, Toast.LENGTH_LONG).show();
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     public void SetListData() {
         notifyDataSetChanged();
@@ -135,10 +144,8 @@ public class OrderCardAdapter extends RecyclerView.Adapter<OrderCardAdapter.View
                 Log.d("resID", "strProductID: " + strid);
                 String index = strid.split(";")[1];
                 int i = Integer.parseInt(index);
-                OrderCartConfig.orderCartItemArrayList.remove(i);
-                ((OrderCartItemActivity)_context).PutOrderCartToServer();
-                Toast.makeText(_context, "您將在購物車內移除商品：" + strName, Toast.LENGTH_LONG).show();
-                notifyDataSetChanged();
+                PublicFunction.showConfirmDialog(_context, i, OrderCardAdapter.this, "你將刪除購物車內此商品嗎？" + strName);
+
                 return false;
             }
         });
